@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+    <title>allTeamClasses</title>
+    <!-- element ui css -->
+    <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet"/>
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon"/>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"/>
+
+    <!-- Flaticon Font -->
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet"/>
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.min.css" rel="stylesheet"/>
+
+    <style>
+        .login {
+            display: inline;
+            position: relative;
+            left: calc(100% - 150px);
+            top: 5px;
+        }
+
+        .register {
+            display: inline;
+            position: relative;
+            left: calc(100% - 150px);
+            top: 5px;
+            color: white;
+        }
+
+        #app {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80vw;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body class="bg-white">
+<!-- Navbar Start -->
+<div class="container-fluid p-0 nav-bar">
+    <nav
+            class="navbar navbar-expand-lg bg-none navbar-dark p-0 bg-secondary position-fixed justify-content-between"
+            style="width: 100vw">
+        <a class="navbar-brand" href="../index.html">
+            <h1 class="m-0 display-4 font-weight-bold text-uppercase text-white"
+                style="padding-left: 15px">Muscle beach</h1>
+        </a>
+        <button class="navbar-toggler" data-target="#navbarCollapse" data-toggle="collapse"
+                type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between"
+             id="navbarCollapse">
+            <div class="navbar-nav ml-auto p-4 bg-secondary">
+                <a class="nav-item nav-link" href="../product/shop.jsp">線上商城</a>
+                <a class="nav-item nav-link" href="../room/listAllRoom.jsp">找場地</a>
+                <a class="nav-item nav-link" href="../coach/coachList.jsp">找教練</a>
+                <a class="nav-item nav-link active" href="class.html">找課程</a>
+                <div class="nav-item dropdown">
+                    <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown"
+                       href="#">會員專區</a>
+                    <form action="../../back-end/member/mem.do" method="post">
+                        <div class="dropdown-menu text-capitalize">
+                            <a class="dropdown-item" href="../member/mem_info.jsp">會員資料</a>
+                            <a class="dropdown-item" href="../coach/memcoachclasslist.jsp">教練課管理</a>
+                            <a class="dropdown-item" href="./myClassOrders.html">團課管理</a>
+                            <a class="dropdown-item" href="./myAbsence.html">查看團課缺席</a>
+                            <a class="dropdown-item" href="../room/room_order_info.jsp">場地管理</a>
+
+                            <input class="btn text-danger" style="margin-left:10px;" type="submit" value="登出">
+                            <input name="action" type="hidden" value="logout"/>
+                        </div>
+                    </form>
+                </div>
+                <a class="nav-link" href="../article/listAllArticle.jsp">會員交流區</a>
+                <div class="nav-item dropdown">
+                    <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown"
+                       href="#">聯絡我們</a>
+                    <div class="dropdown-menu text-capitalize">
+                        <a class="dropdown-item" href="../question/listAllQuestion.jsp">常見問題</a> <a
+                            class="dropdown-item" href="../news/listAllNews.jsp">最新資訊</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- Navbar End -->
+
+<!-- Page Header Start -->
+<!--         <div class="container-fluid page-header mb-5"> -->
+<!--             <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px"> -->
+<!--                 <h4 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase font-weight-bold">Gym Classes</h4> -->
+<!--                 <div class="d-inline-flex"> -->
+<!--                     <p class="m-0 text-white"><a class="text-white" href="">Home</a></p> -->
+<!--                     <p class="m-0 text-white px-2">/</p> -->
+<!--                     <p class="m-0 text-white">Gym Classes</p> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
+<div class="container-fluid page-header mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-0">
+
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Gym Class Start -->
+
+<!-- Gym Class End -->
+
+<!-- title(?) start -->
+<div class="container gym-feature py-5">
+    <div class="d-flex flex-column text-center mb-5">
+
+        <h4 class="display-4 font-weight-bold">Working Hours and Class Time</h4>
+    </div>
+</div>
+<!-- title(?) end -->
+
+<!-- vue 板塊 start -->
+<div id="app">
+    <!-- 圖片 -->
+    <el-carousel :height="300" :interval="3000" arrow="always">
+        <el-carousel-item :key="index" v-for="(item, index) in 9">
+            <img :src="'./img/teamClass/' + (index + 1) + '.jpg'" alt="img" class="carousel-image"/>
+        </el-carousel-item>
+    </el-carousel>
+    <!-- 日曆功能 -->
+    <el-calendar first-day-of-week="7">
+        <template slot="dateCell" slot-scope="{date, data}">
+            <div>{{data.day.split('-').slice(2).toString()}}</div>
+            <div v-if="showDay(classSchedules, data.day)">
+                <el-popover
+                        :content="item.classContent"
+                        :key="index"
+                        :title="'上課時間:' + item.time"
+                        placement="top-start"
+                        trigger="hover"
+                        v-for="(item, index) in showDay(classSchedules, data.day)"
+                        width="200"
+                >
+                    <div onmouseout="this.style.background= null" onmouseover="this.style.background = '#99FFFF'"
+                         slot="reference">
+                        {{item.className}}
+                    </div>
+                </el-popover>
+            </div>
+        </template>
+    </el-calendar>
+    <!-- 搜索欄 -->
+    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+        <el-form-item label="課程種類">
+            <el-select placeholder="課程種類" v-model="formInline.classType.typeID">
+                <el-option label="不指定" value=""></el-option>
+                <el-option :label="classType.typeName" :value="classType.typeID"
+                           v-for="classType in classTypes"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="課程名稱">
+            <el-input placeholder="課程名稱" v-model="formInline.className"></el-input>
+        </el-form-item>
+        <el-form-item label="課程狀態">
+            <el-select placeholder="課程狀態" v-model="formInline.classStatus">
+                <el-option label="不指定" value=""></el-option>
+                <el-option label="上架" value="true"></el-option>
+                <el-option label="下架" value="false"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item>
+            <span>查詢當月課程 </span>
+            <el-switch active-color="#13ce66" inactive-color="#717171" v-model="currentMonth"></el-switch>
+            <el-button @click="onSubmit" @keyup.enter="onSubmit" type="primary">查詢</el-button>
+        </el-form-item>
+    </el-form>
+    <!-- 表格 -->
+    <el-table :data="tableData" stripe>
+        <el-table-column align="center" label="老師名稱" prop="employee.empName"></el-table-column>
+        <el-table-column align="center" label="課程種類" prop="classType.typeName"></el-table-column>
+        <el-table-column align="center" label="課程名稱" prop="className"></el-table-column>
+        <el-table-column align="center" label="人數上限" prop="peopleMax"></el-table-column>
+        <el-table-column align="center" label="課程狀態" prop="classStatus">
+            <template slot-scope="scope">{{scope.row.classStatus ? "上架" : "下架"}}</template>
+        </el-table-column>
+        <el-table-column align="center" label="操作">
+            <el-row slot-scope="scope">
+                <el-button @click="getDetails(scope.$index)" round type="primary">查看詳情</el-button>
+                <el-button @click="reserve(scope.$index)" round type="success"
+                           v-show="getOrderStatus(scope.$index) === 0"
+                >預約課程
+                </el-button>
+                <el-button @click="cancel(scope.$index)" round type="danger"
+                           v-show="getOrderStatus(scope.$index) === 1">取消課程
+                </el-button>
+            </el-row>
+        </el-table-column>
+    </el-table>
+    <!-- 詳情 -->
+    <el-dialog :visible.sync="centerDialogVisible" center title="詳情" width="75%">
+        <div>課程內容: {{classDetails.classContent}}</div>
+        <div>已報名人數: {{classDetails.reserved}}</div>
+        <el-table :data="details">
+            <el-table-column align="center" label="日期">
+                <template slot-scope="scope"> {{new Date(scope.row.startTime).toLocaleDateString('sv-SE')}}</template>
+            </el-table-column>
+            <el-table-column align="center" label="上課時間">
+                <template slot-scope="scope">
+                    {{new Date(scope.row.startTime).toLocaleTimeString('sv-SE', {hour12: false})}}
+                </template>
+            </el-table-column>
+            <el-table-column align="center" label="下課時間">
+                <template slot-scope="scope">
+                    {{new Date(scope.row.endTime).toLocaleTimeString('sv-SE', {hour12: false})}}
+                </template>
+            </el-table-column>
+        </el-table>
+    </el-dialog>
+    <!-- 分頁 -->
+    <el-pagination
+            :current-page="currentPage"
+            :page-size="pageSize"
+            :total="totalCount"
+            :total="totalCount"
+            @current-change="handleCurrentChange"
+            background
+            layout="total, prev, pager, next"
+    >
+    </el-pagination>
+</div>
+<!-- vue 板塊 end -->
+
+<!-- Footer Start -->
+<div
+        class="footer container-fluid mt-5 py-5 px-sm-3 px-md-5 text-white">
+    <div style="display: inline; padding: 0px;">
+        <div class="col-lg-0 col-md-10 " style="margin: auto">
+            <h5 class="text-white mb-4">聯絡我們</h5>
+            <p style="display: inline-block;">
+                <i class="fa fa-map-marker-alt mr-2"></i>住址
+            </p>
+            <p style="display: inline-block; position: absolute; right: 420px;">
+                <i class="fa fa-phone-alt mr-2"></i>0987-654-321
+            </p>
+            <p style="display: inline; float: right;" ;>
+                <i class="fa fa-envelope mr-2"></i>abc信箱@gmail.com
+            </p>
+        </div>
+    </div>
+    <div class="container border-top border-dark pt-2">
+        <p class="m-0 text-center text-white">
+            &copy; <a class="text-white font-weight-bold" href="#">Muscale
+            beach</a> <a class="text-white font-weight-bold"
+                         href="https://htmlcodex.com"></a>版權所有 翻印必究
+        </p>
+    </div>
+</div>
+<!-- Footer End -->
+
+<!-- Back to Top -->
+<a class="btn btn-outline-primary back-to-top" href="#"><i class="fa fa-angle-double-up"></i></a>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+
+<!-- Contact Javascript File -->
+<script src="mail/jqBootstrapValidation.min.js"></script>
+<script src="mail/contact.js"></script>
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+
+<!-- 我用到的js -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/element-ui/lib/umd/locale/zh-TW.js"></script>
+<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js"></script>
+
+<script>
+    ELEMENT.locale(ELEMENT.lang.zhTW);
+    const app = new Vue({
+        el: '#app',
+        mounted() {
+            this.getMemInfo();
+            this.getClassOrders();
+            this.load();
+            this.getClassTypes();
+            this.getClassSchedules();
+        },
+        data() {
+            return {
+                // 會員訂單狀態
+                classOrders: null,
+                // 會員資訊
+                memID: -1,
+                memInfo: null,
+                // 課程種類
+                classTypes: null,
+                //開關
+                currentMonth: false,
+                // 資料總比數
+                totalCount: null,
+                // 當前頁碼
+                currentPage: 1,
+                // 每頁長度
+                pageSize: 5,
+                // 搜索用
+                formInline: {
+                    classType: {
+                        typeID: null,
+                    },
+                    className: null,
+                    classStatus: null,
+                },
+                // 表格資料
+                tableData: null,
+                // 查看詳情資料
+                details: null, // 上課時間
+                classDetails: {classContent: null, reserved: null}, // 課程詳情
+                centerDialogVisible: false, // 詳情開關
+                // 所有課程日期
+                classSchedules: [],
+            };
+        },
+        methods: {
+            // 獲取會員名稱、權限等資料
+            getMemInfo() {
+                axios.get(`../../member/memID`)
+                    .then((Response) => {
+                        this.memInfo = Response.data.data;
+                        this.memID = this.memInfo.memID;
+                    });
+            },
+            // 載入資料
+            load() {
+                axios
+                    .get(`../../teamClasses/page/${this.currentPage}/${this.pageSize}`)
+                    .then((Response) => ((this.tableData = Response.data.data.list), (this.totalCount = Response.data.data.totalCount)))
+                    .catch((error) => this.$message.error('系統忙碌中'));
+            },
+            // 獲取課程類別
+            getClassTypes() {
+                axios
+                    .get('../../classTypes')
+                    .then((Response) => (this.classTypes = Response.data.data))
+                    .catch((error) => this.$message.error('系統忙碌中'));
+            },
+            // 獲取會員訂單資料
+            getClassOrders() {
+                axios.get(`../../classOrders/memID`).then((Response) => {
+                    this.classOrders = Response.data.data;
+                });
+            },
+            // 獲取訂單狀態
+            getOrderStatus(index) {
+                const classID = this.tableData[index].classID;
+                for (let classOrder of this.classOrders) {
+                    if (classOrder.teamClass.classID === classID) {
+                        return classOrder.orderStatus;
+                    }
+                }
+                return 0;
+            },
+            // 獲取日曆資料
+            getClassSchedules() {
+                axios.get('../../classSchedules').then((Response) => {
+                    const data = Response.data.data;
+                    for (let row of data) {
+                        const classSchedule = {
+                            classID: row.teamClass.classID,
+                            className: row.teamClass.className,
+                            classContent: row.teamClass.classContent,
+                            day: new Date(row.startTime).toLocaleDateString('sv-SE'),
+                            time: new Date(row.startTime).toLocaleTimeString('sv-SE'),
+                        };
+                        this.classSchedules.push(classSchedule);
+                    }
+                });
+            },
+            // 顯示日曆資料
+            showDay(classSchedules, dataDay) {
+                const result = classSchedules.filter((e) => e.day === dataDay);
+                if (result.length === 0) return null;
+                return result;
+            },
+            // 預約
+            reserve(index) {
+                if (this.memID == -1) {
+                    return this.$confirm('點擊確定前往登入', '你尚未登入', {
+                        confirmButtonText: '確定',
+                        cancelButtonText: '取消',
+                        type: 'info',
+                    })
+                        .then(() => {
+                            location.href = '../member/login.jsp';
+                        })
+                        .catch(() => {
+                            this.$message({
+                                type: 'info',
+                                message: '需要登入才能預約課程...',
+                            });
+                        });
+                }
+                if (this.memInfo.memStatus !== 1) {
+                    return this.$message.error('你的會員狀態為未啟用或以被除籍');
+                }
+                if (this.memInfo.memAccess === 0) {
+                    return this.$confirm('升級為健身會員即可預約課程', '你是一般會員', {
+                        confirmButtonText: '確定',
+                        cancelButtonText: '取消',
+                        type: 'info',
+                    })
+                        .then(() => {
+                            location.href = '../creditCard/addCreditCard.jsp';
+                        })
+                        .catch(() => {
+                            this.$message({
+                                type: 'info',
+                                message: '需要成為健身會員才能預約課程...',
+                            });
+                        });
+                }
+                if (this.memInfo.memAccess === 2) {
+                    return this.$message.error('你已被停權!');
+                }
+                return this.$confirm('確定預約嗎?', '提示', {
+                    confirmButtonText: '確定',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                })
+                    .then(() => {
+                        const classID = this.tableData[index].classID;
+                        axios
+                            .post('../../classOrders/reservation', {
+                                member: {
+                                    memID: this.memID,
+                                },
+                                teamClass: {
+                                    classID: classID,
+                                },
+                            })
+                            .then((Response) => {
+                                if (Response.data.code === 20011) {
+                                    this.getClassOrders();
+                                    return this.$message({
+                                        message: Response.data.msg,
+                                        type: 'success',
+                                    });
+                                } else {
+                                    this.$message.error(Response.data.msg);
+                                }
+                            })
+                            .catch((error) => this.$message.error('系統忙碌中'));
+                    })
+                    .catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消',
+                        });
+                    });
+            },
+            // 取消預約
+            cancel(index) {
+                this.$confirm('確定取消預約嗎?', '提示', {
+                    confirmButtonText: '確定',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                })
+                    .then(() => {
+                        const classID = this.tableData[index].classID;
+                        axios
+                            .put('../../classOrders/cancel', {
+                                member: {
+                                    memID: this.memID,
+                                },
+                                teamClass: {
+                                    classID: classID,
+                                },
+                            })
+                            .then((Response) => {
+                                if (Response.data.code === 20031) {
+                                    this.getClassOrders();
+                                    return this.$message({
+                                        message: Response.data.msg,
+                                        type: 'success',
+                                    });
+                                } else {
+                                    this.$message.error(Response.data.msg);
+                                }
+                            })
+                            .catch((error) => this.$message.error('系統忙碌中'));
+                    })
+                    .catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '尚未取消預約',
+                        });
+                    });
+            },
+            // 查看詳情
+            getDetails(index) {
+                this.centerDialogVisible = true;
+                const classID = this.tableData[index].classID;
+                this.classDetails.classContent = this.tableData[index].classContent;
+                axios
+                    .get(`../../classSchedules/classID/${classID}`)
+                    .then((Response) => (this.details = Response.data.data))
+                    .catch((error) => this.$message.error('系統忙碌中'));
+                axios
+                    .get(`../../classOrders/classID/${classID}`)
+                    .then((Response) => (this.classDetails.reserved = Response.data.data))
+                    .catch((error) => this.$message.error('系統忙碌中'));
+            },
+            //搜索
+            onSubmit() {
+                this.currentPage = 1;
+                if (this.currentMonth) {
+                    this.onCurrentMonth();
+                } else {
+                    this.onAll();
+                }
+            },
+            // 查詢全部課程
+            onAll() {
+                this.iterateObj(this.formInline);
+                console.log(this.formInline);
+                let bool = this.formInline.classStatus;
+                if (bool != null) bool = bool === 'true';
+                axios
+                    .get(`../../teamClasses/page/${this.currentPage}/${this.pageSize}?${Qs.stringify(this.formInline, {allowDots: true})}`)
+                    .then((Response) => {
+                        this.tableData = Response.data.data.list;
+                        this.totalCount = Response.data.data.totalCount;
+                    })
+                    .then(() => (bool = bool ? '上架' : '下架'))
+                    .catch((error) => this.$message.error('系統忙碌中'));
+            },
+            // 查詢當月課程
+            onCurrentMonth() {
+                this.iterateObj(this.formInline);
+                console.log(this.formInline);
+                let bool = this.formInline.classStatus;
+                if (bool != null) bool = bool === 'true';
+                axios
+                    .get(
+                        `../../classSchedules/page/${this.currentPage}/${this.pageSize}?${Qs.stringify(this.formInline, {allowDots: true})}`
+                    )
+                    .then((Response) => {
+                        this.totalCount = Response.data.data.totalCount;
+                        this.tableData = Response.data.data.list;
+                    })
+                    .then(() => (bool = bool ? '上架' : '下架'))
+                    .catch((error) => this.$message.error('系統忙碌中'));
+            },
+            // 當頁碼變更時
+            handleCurrentChange(value) {
+                this.currentPage = value;
+                if (this.currentMonth) {
+                    this.onCurrentMonth();
+                } else {
+                    this.onAll();
+                }
+            },
+            // 遍歷物件
+            iterateObj(obj) {
+                for (let data in obj) {
+                    if (typeof obj[data] === typeof obj) {
+                        this.iterateObj(obj[data]);
+                    }
+                    if (obj[data] === '') {
+                        obj[data] = null;
+                    }
+                }
+            },
+        },
+    });
+</script>
+</body>
+</html>

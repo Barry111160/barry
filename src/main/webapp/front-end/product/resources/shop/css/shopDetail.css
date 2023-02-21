@@ -1,0 +1,10 @@
+.hoverable {
+    opacity: 0.8;
+    transition: all 0.1s ease-in-out;
+}
+
+.hoverable:hover {
+    opacity: 1;
+    background-color: #EEEEEE;
+    border: 3px solid #BDBDBD;
+}

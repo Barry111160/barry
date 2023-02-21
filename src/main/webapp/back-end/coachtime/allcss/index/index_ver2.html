@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Muscle Beach 後台首頁</title>
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/headers/"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/sidebars/"
+    />
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style type="text/css"></style>
+    <link href="index.css" rel="stylesheet" />
+    <!-- Flaticon Font -->
+    <link href="/lib/flaticon/font/flaticon.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- ======================================== header 開始 ======================================== -->
+    <header class="p-3 text-bg-dark">
+      <div class="container">
+        <div
+          class="d-flex flex-wrap align-items-center justify-content-between"
+        >
+          <div class="header_1">
+            <i class="flaticon-barbell"></i>
+            <span>Muscle Beach</span>
+          </div>
+          <div class="header_2">
+            <span style="margin-right: 50px">Welcome, user !</span>
+            <button
+              type="button"
+              class="btn btn-outline-light"
+              style="margin-right: 5px"
+            >
+              修改密碼
+            </button>
+            <button type="button" class="btn btn-outline-light">登出</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ======================================== sidebar 開始 ======================================== -->
+    <main class="d-flex flex-nowrap">
+      <div
+        class="d-flex flex-column flex-shrink-0 p-3"
+        style="width: 280px; background-color: rgb(110, 109, 109)"
+      >
+        <ul
+          class="nav nav-pills flex-column mb-auto"
+          id="v-pills-tab"
+          role="tablist"
+          aria-orientation="vertical"
+          style="text-align: center"
+        >
+          <li class="nav-item">
+            <a
+              class="nav-link active text-white"
+              id="v-pills-home-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-home"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-home"
+              aria-selected="true"
+              aria-current="page"
+              style="font-size: 1.5rem"
+            >
+              <i class="bi bi-house-door" style="margin-right: 8px"></i>
+              首頁
+            </a>
+          </li>
+          <hr />
+          <li class="nav-item">
+            <a
+              class="nav-link text-white"
+              id="v-pills-employee-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-employee"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-employee"
+              aria-selected="false"
+            >
+              <i class="bi bi-person" style="color: white; margin: 5px"></i>
+              員工管理
+            </a>
+          </li>
+          <li>
+            <a
+              class="nav-link text-white"
+              id="v-pills-member-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-member"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-member"
+              aria-selected="false"
+            >
+              <i
+                class="bi bi-person-circle"
+                style="color: white; margin: 5px"
+              ></i>
+              會員管理
+            </a>
+          </li>
+          <li>
+            <a
+              class="nav-link text-white"
+              id="v-pills-shop-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-shop"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-shop"
+              aria-selected="false"
+            >
+              <i class="bi bi-shop" style="color: white; margin: 5px"></i>
+              商城管理
+            </a>
+          </li>
+          <li>
+            <a
+              class="nav-link text-white"
+              id="v-pills-coach-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-coach"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-coach"
+              aria-selected="false"
+            >
+              <i
+                class="bi bi-universal-access"
+                style="color: white; margin: 5px"
+              ></i>
+              教練管理
+            </a>
+          </li>
+          <li>
+            <a
+              class="nav-link text-white"
+              id="v-pills-class-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-class"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-class"
+              aria-selected="false"
+            >
+              <i
+                class="bi bi-calendar2-week"
+                style="color: white; margin: 5px"
+              ></i>
+              課程管理
+            </a>
+          </li>
+          <li>
+            <a
+              class="nav-link text-white"
+              id="v-pills-room-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-room"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-room"
+              aria-selected="false"
+            >
+              <i class="bi bi-building" style="color: white; margin: 5px"></i>
+              場地管理
+            </a>
+          </li>
+          <li>
+            <a
+              class="nav-link text-white"
+              id="v-pills-article-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-article"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-article"
+              aria-selected="false"
+            >
+              <i
+                class="bi bi-chat-right-text"
+                style="color: white; margin: 5px"
+              ></i>
+              論壇管理
+            </a>
+          </li>
+          <li>
+            <a
+              class="nav-link text-white"
+              id="v-pills-service-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-service"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-service"
+              aria-selected="false"
+            >
+              <i class="bi bi-envelope" style="color: white; margin: 5px"></i>
+              客服管理
+            </a>
+          </li>
+        </ul>
+        <hr />
+        <div class="mx-auto d-flex mt-3 mb-3 text-muted">&copy; 2022</div>
+      </div>
+      <div class="tab-content" id="v-pills-tabContent">
+        <!-- ============================================ 首頁 ============================================ -->
+        <div
+          class="tab-pane fade show active"
+          id="v-pills-home"
+          role="tabpanel"
+          aria-labelledby="v-pills-home-tab"
+          tabindex="0"
+        >
+          <img src="/image/welcome.gif" style="width: 96%" alt="" />
+        </div>
+        <!-- ========================================= 員工管理 ========================================= -->
+        <div
+          class="tab-pane fade"
+          id="v-pills-employee"
+          role="tabpanel"
+          aria-labelledby="v-pills-employee-tab"
+          tabindex="0"
+          style="border: 2px solid green"
+        >
+          employee section Lorem ipsum dolor sit amet consectetur adipisicing
+          elit. Minima reprehenderit adipisci praesentium atque! Corrupti
+          ratione itaque magni unde culpa ex?
+        </div>
+        <!-- ========================================= 會員管理 ========================================= -->
+        <div
+          class="tab-pane fade"
+          id="v-pills-member"
+          role="tabpanel"
+          aria-labelledby="v-pills-member-tab"
+          tabindex="0"
+        >
+          member section Lorem ipsum, dolor sit amet consectetur adipisicing
+          elit. Repellendus repellat quisquam quod voluptatum reprehenderit
+          tempora vel quis quo ab atque, odio fuga quibusdam recusandae error,
+          animi delectus. Vitae error perferendis ipsam fuga eius! Mollitia,
+          veniam. Expedita quibusdam magni iste dignissimos quasi sit illum quo
+          ullam, odit laudantium distinctio placeat quisquam voluptates
+          doloribus rem eligendi repudiandae, id, saepe architecto aut harum vel
+          quis nihil accusantium? Voluptas quaerat, voluptatem iure cupiditate
+          velit corporis. Dolor cupiditate magni eum assumenda! Neque incidunt
+          quo impedit iste delectus odio doloremque temporibus tempore, facere
+          provident ut recusandae assumenda tenetur rem et deleniti quibusdam.
+          Obcaecati dicta laudantium fuga repellendus facilis harum autem eos
+          non quasi nulla, suscipit exercitationem consectetur tenetur a modi,
+          accusantium magni! Praesentium possimus nemo, eveniet fugit eaque,
+          ratione rem asperiores quasi ut quibusdam quia distinctio repellendus
+          minus mollitia tempore aliquam? Ab, nostrum corporis fuga accusamus
+          dolores, placeat eius vitae quos qui aut atque ea aliquid magni
+          voluptatem voluptate alias incidunt nemo aliquam cum rerum officiis!
+          Soluta hic illum pariatur fugit sequi earum expedita modi illo debitis
+          ipsum officiis ratione nulla quo totam molestiae quod, vel maiores
+          eaque est mollitia quia ipsa, enim nesciunt! Velit repellat, natus
+          incidunt quis blanditiis rerum cupiditate minus similique quas vel,
+          facere dolorum numquam possimus distinctio. Numquam, asperiores nihil
+          laborum eos architecto deserunt quia optio unde. Repudiandae maxime
+          cumque fugiat doloremque at provident culpa nam delectus! Blanditiis
+          eum nesciunt quibusdam quod rem deserunt nihil dolorum pariatur sit
+          cumque sed veritatis, quidem consequuntur facilis dolores ipsam
+          debitis voluptates voluptate in omnis at ea ab consectetur laboriosam!
+          Similique aliquam dolorem odio asperiores perspiciatis sapiente iure
+          ab quaerat enim, laboriosam laudantium veniam aliquid. Dignissimos, ea
+          molestias a modi autem expedita repellendus amet, fuga ullam, enim
+          obcaecati laboriosam vero quae nobis veritatis fugiat exercitationem
+          sequi quas debitis? Iste cupiditate suscipit quasi nam vitae. Numquam
+          ea provident praesentium exercitationem ut, tempora, natus
+          necessitatibus possimus distinctio voluptas molestias qui quidem nobis
+          reprehenderit quaerat maiores laboriosam. Sapiente omnis laboriosam
+          vitae cumque reiciendis est porro natus laborum iusto nesciunt.
+          Eveniet sed officia molestias provident accusantium! Laudantium a
+          suscipit quae provident quas autem sunt ducimus odio iure, ad quis
+          soluta quasi. Fugit officiis possimus ab provident dignissimos,
+          quidem, doloribus eos id maxime nihil dolore iure, laudantium sit
+          mollitia facilis? Temporibus officiis fugiat minima. Beatae
+          praesentium eos eveniet voluptates? Distinctio alias, praesentium
+          necessitatibus obcaecati deleniti, ducimus sit ipsa impedit tempore,
+          reiciendis at. Quae assumenda sit eligendi magni magnam enim velit.
+          Est labore nesciunt non corrupti qui aspernatur similique! Ea
+          consequatur necessitatibus quia voluptatum, ipsa autem sed ex aliquid
+          voluptate a facere eius dolorum sunt quisquam, quasi accusamus id,
+          vitae deleniti! Repellat nulla praesentium pariatur iure quod fugit
+          incidunt animi aperiam dolorem deserunt. Quos qui dolorum sunt tempore
+          ut debitis reiciendis obcaecati? A asperiores nesciunt hic. Cupiditate
+          nam architecto dolore ipsam! Dignissimos, magnam? Atque, placeat!
+          Atque omnis voluptate in sint vel tempora, dolorum facilis? Ullam
+          dolores harum illum tenetur aperiam eveniet eos officiis, id, at
+          repellat praesentium accusamus repudiandae vitae fugit dicta illo
+          suscipit tempora quasi excepturi repellendus, explicabo labore
+          voluptatum! Ex odit possimus ratione quisquam ipsum. Facilis quibusdam
+          aut voluptatibus nam. Repellendus inventore quo eius quas quia
+          eligendi voluptates illo odit corrupti placeat atque odio facere dicta
+          in dolore, esse deleniti quisquam, quidem harum? Reiciendis tempora,
+          error ullam voluptatibus doloribus odio eius itaque officia,
+          recusandae quaerat accusamus incidunt eos repellat et! Sit numquam
+          consequuntur excepturi amet reprehenderit ea rem, magni corrupti,
+          optio quisquam magnam nobis error veniam natus suscipit repellat ex
+          non labore! Fuga amet debitis, numquam facilis repellat quaerat id
+          iusto perspiciatis earum, necessitatibus dolorum omnis laboriosam
+          dolorem accusantium nisi quidem tempora! Neque repellat dolorum fugit
+          nesciunt cumque cum facere provident. Et fugiat voluptatem itaque
+          iusto repellendus ipsum quis ex impedit veniam, non consequuntur nam
+          officia distinctio nobis! Quae quia sint iste molestiae similique
+          harum excepturi soluta suscipit expedita nam ipsa, quos nostrum libero
+          molestias voluptate eos velit facere maiores deserunt dolorum.
+          Pariatur sapiente qui veniam vero similique blanditiis tempora illo
+          maxime magni dolorem aut sunt cupiditate, eaque, aliquam architecto
+          inventore voluptatibus voluptates vel non tempore? Aspernatur,
+          voluptates! Vitae recusandae nobis voluptatum odio odit porro
+          distinctio modi neque consequatur aspernatur voluptate at placeat quam
+          quae, maiores vero hic laudantium qui. Quia quos dolorum distinctio
+          mollitia non impedit unde tempora fugiat ut dolores rerum sunt in ab
+          beatae delectus voluptatum veniam tenetur, eveniet atque autem quae!
+          Ullam accusamus hic corporis magnam? Vero eveniet nesciunt suscipit
+          unde error natus aliquam consequuntur possimus repellendus. Error iste
+          hic tempore dignissimos earum minima aut atque quisquam aliquid
+          officia nihil sapiente ducimus, dolorem, expedita eum corporis porro
+          doloribus soluta omnis placeat reiciendis consequuntur unde? Iure,
+          quasi ut. Quasi animi tempora corrupti dignissimos maiores inventore
+          facilis sit. Ut veniam debitis reprehenderit, enim nam provident
+          deleniti, corporis rem laborum recusandae earum maxime quibusdam error
+          explicabo exercitationem delectus veritatis commodi labore dolores
+          odio praesentium ducimus ad consequatur culpa? Quasi, quam tenetur
+          eius facilis esse maiores ipsam! Similique qui, nesciunt dignissimos
+          distinctio officiis iusto enim aperiam tenetur eligendi cupiditate
+          laudantium voluptate veniam recusandae, laboriosam aliquid, animi
+          delectus repellendus voluptas iste saepe ipsa esse illo! Ea nobis,
+          repellat consequuntur id dolor accusantium tenetur reprehenderit omnis
+          at, laudantium cupiditate recusandae voluptate repudiandae animi
+          dolorem laboriosam et sunt! Magnam nam reprehenderit eligendi iste
+          beatae ut similique vitae! Corrupti, nemo? Reprehenderit animi,
+          voluptate, temporibus eos incidunt voluptatibus nostrum aspernatur
+          atque amet sequi ratione inventore quis ducimus dolor quia aut
+          aliquid, expedita obcaecati dolorem illo? Ut error ea reprehenderit
+          vitae recusandae qui ad dicta amet ab eum fugiat, id delectus possimus
+          laboriosam officiis deleniti officia dolorem tenetur cum animi! Nobis
+          recusandae enim qui, excepturi, dolorem veritatis corporis laudantium
+          eius nisi ipsum quia, odit facilis consectetur voluptas. In mollitia
+          animi harum iure quisquam inventore suscipit illum esse temporibus
+          cupiditate asperiores, architecto illo deleniti optio numquam? Commodi
+          blanditiis saepe labore veniam excepturi illum, officia aut
+          accusantium a vero doloremque alias nostrum sequi, consequatur
+          consequuntur! Repudiandae distinctio recusandae similique iste
+          expedita! Veritatis iste tempore, eveniet voluptatum a nulla magnam
+          facilis. Veniam labore assumenda illum vitae? Accusantium quibusdam ea
+          repudiandae facilis autem est, voluptas sed iure sunt eius reiciendis.
+        </div>
+        <!-- ========================================= 商城管理 ========================================= -->
+        <div
+          class="tab-pane fade"
+          id="v-pills-shop"
+          role="tabpanel"
+          aria-labelledby="v-pills-shop-tab"
+          tabindex="0"
+          style="border: 2px solid brown"
+        >
+          shop section
+        </div>
+        <!-- ========================================= 教練管理 ========================================= -->
+        <div
+          class="tab-pane fade"
+          id="v-pills-coach"
+          role="tabpanel"
+          aria-labelledby="v-pills-coach-tab"
+          tabindex="0"
+          style="border: 2px solid rgb(214, 122, 122)"
+        >
+          coach section
+        </div>
+        <!-- ========================================= 課程管理 ========================================= -->
+        <div
+          class="tab-pane fade"
+          id="v-pills-class"
+          role="tabpanel"
+          aria-labelledby="v-pills-class-tab"
+          tabindex="0"
+          style="border: 2px solid purple"
+        >
+          class section
+        </div>
+        <!-- ========================================= 場地管理 ========================================= -->
+        <div
+          class="tab-pane fade"
+          id="v-pills-room"
+          role="tabpanel"
+          aria-labelledby="v-pills-room-tab"
+          tabindex="0"
+          style="border: 2px solid greenyellow"
+        >
+          room section
+        </div>
+        <!-- ========================================= 論壇管理 ========================================= -->
+        <div
+          class="tab-pane fade"
+          id="v-pills-article"
+          role="tabpanel"
+          aria-labelledby="v-pills-article-tab"
+          tabindex="0"
+          style="border: 2px solid rgb(253, 250, 66)"
+        >
+          article
+        </div>
+        <!-- ========================================= 客服管理 ========================================= -->
+        <div
+          class="tab-pane fade"
+          id="v-pills-service"
+          role="tabpanel"
+          aria-labelledby="v-pills-service-tab"
+          tabindex="0"
+          style="border: 2px solid rgb(15, 198, 42)"
+        >
+          service section
+        </div>
+      </div>
+    </main>
+    <script src="/MuscleBeach/js/popper.min.js"></script>
+    <script src="/MuscleBeach/js/bootstrap.min.js"></script>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="sidebars.js"></script>
+  </body>
+</html>

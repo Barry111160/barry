@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.musclebeach.course.mapper.ClassScheduleMapper">
+    <resultMap id="classScheduleResultMap" type="classSchedule">
+        <id column="time_id" property="timeID"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <association column="class_id" property="teamClass"
+                     select="com.musclebeach.course.mapper.TeamClassMapper.selectByID"/>
+    </resultMap>
+    <select id="selectAll" resultMap="classScheduleResultMap">
+        select *
+        from class_schedule
+    </select>
+    <select id="selectByID" resultMap="classScheduleResultMap">
+        select *
+        from class_schedule
+        where time_id = #{timeID}
+    </select>
+    <select id="selectByCurrentMonth" resultMap="com.musclebeach.course.mapper.TeamClassMapper.teamClassResultMap">
+        select distinct cs.class_id, emp_id, type_id, class_name, people_max, class_content, class_status
+        from class_schedule cs
+        join team_class tc on tc.class_id = cs.class_id
+        <where>
+            <if test="true">
+                and cs.class_id in (select class_id from class_schedule group by class_id)
+                and start_time between date_add(curdate(), interval -day(curdate()) + 1 day) and last_day(curdate())
+            </if>
+            <include refid="com.musclebeach.course.mapper.TeamClassMapper.selectLimitIf"/>
+        </where>
+        limit #{begin}, #{size}
+    </select>
+    <select id="totalCount" resultType="integer">
+        select count(distinct cs.class_id, emp_id, type_id, class_name, people_max, class_content, class_status)
+        from class_schedule cs
+        join team_class tc on tc.class_id = cs.class_id
+        <where>
+            <if test="true">
+                and cs.class_id in (select class_id from class_schedule group by class_id)
+                and start_time between date_add(curdate(), interval -day(curdate()) + 1 day) and last_day(curdate())
+            </if>
+            <include refid="com.musclebeach.course.mapper.TeamClassMapper.selectIf"/>
+        </where>
+    </select>
+    <select id="selectByClassID" resultMap="classScheduleResultMap">
+        select *
+        from class_schedule
+        where class_id = #{classID}
+    </select>
+</mapper>

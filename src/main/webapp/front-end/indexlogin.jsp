@@ -1,0 +1,486 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Muscle Beach</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Favicon -->
+
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Flaticon Font -->
+    <link href="./resources/lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+
+
+    <script src="js/jquery2.min.js"></script>
+    <script src="js/wow.js"></script>
+    <script src="js/main2.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
+    <script src="./resources/frontStage/lib/easing/easing.min.js"></script>
+    <script src="./resources/frontStage/lib/waypoints/waypoints.min.js"></script>
+    <script src="./resources/frontStage/mail/jqBootstrapValidation.min.js"></script>
+    <script src="./resources/frontStage/mail/contact.js"></script>
+    <script src="js/main.js"></script>
+    <link href="./room/css/style.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="./room/css/style.css">
+    <style>
+        .login {
+            display: inline;
+            position: relative;
+            Left: calc(100% - 150px);
+            top: 5px;
+        }
+
+        .register {
+            display: inline;
+            position: relative;
+            Left: calc(100% - 150px);
+            top: 5px;
+            color: white;
+        }
+
+        #more3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        #more4 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+
+<style>
+    * {
+        font-family: 微軟正黑體;
+    }
+
+    body {
+        background-color: white;
+    }
+
+    #username,
+    #password,
+    #fullname,
+    #comfirm_password,
+    #username2,
+    #password2 {
+        width: 200px;
+        height: 20px;
+        margin: 10px;
+        color: #df5334;
+    }
+
+    h5 {
+        margin: 20px;
+        color: #a3a2a3;
+    }
+
+    h5:hover {
+        color: black;
+    }
+
+    
+
+    .system_name {
+        /*定位對齊*/
+        position: relative;
+        margin: auto;
+        top: 100px;
+        text-align: center;
+    }
+
+    .submit {
+        color: white;
+        background: #df5334;
+        width: 200px;
+        height: 30px;
+        margin: 10px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 0px;
+    }
+
+    .submit:hover {
+        background: #db6937;
+    }
+
+    #container2 {
+        visibility: hidden;
+        /*剛開始消失*/
+        height: 350px;
+    }
+
+
+    #copyright {
+        text-align: center;
+        color: #a3a2a3;
+        margin: -200px 0px 0px 0px;
+        font-size: 14px;
+    }
+
+    input {
+        padding: 5px;
+        border: none;
+        border: solid 1px #ccc;
+        border-radius: 5px;
+    }
+</style>
+
+
+</head>
+
+<body class="bg-white">
+
+    
+  
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0 nav-bar">
+        <nav
+                class="navbar navbar-expand-lg bg-none navbar-dark p-0 bg-secondary position-fixed justify-content-between"
+                style="width: 100vw">
+            <a href="#" class="navbar-brand">
+                <h1 class="m-0 display-4 font-weight-bold text-uppercase text-white"
+                    style="padding-left: 15px">Muscle beach</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse"
+                    data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between"
+                 id="navbarCollapse">
+                <div class="navbar-nav ml-auto p-4 bg-secondary">
+                    <a href="<%=request.getContextPath()%>/front-end/product/shop.jsp" class="nav-item nav-link">線上商城</a>
+                    <a href="<%=request.getContextPath()%>/front-end/room/listAllRoom.jsp" class="nav-item nav-link">找場地</a>
+                    <a href="<%=request.getContextPath()%>/front-end/coach/coachList.jsp" class="nav-item nav-link">找教練</a>
+                    <a href="<%=request.getContextPath()%>/front-end/course/class.html" class="nav-item nav-link">找課程</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-item nav-link dropdown-toggle"
+                           data-toggle="dropdown">會員專區</a>
+                        <form method="post" action="<%=request.getContextPath()%>/back-end/member/mem.do">
+                            <div class="dropdown-menu text-capitalize">
+                                <a href="<%=request.getContextPath()%>/front-end/member/mem_info.jsp" class="dropdown-item">會員資料</a>
+                                <a href="<%=request.getContextPath()%>/front-end/coach/memcoachclasslist.jsp" class="dropdown-item">教練課管理</a>
+                                <a href="<%=request.getContextPath()%>/front-end/course/myClassOrders.html" class="dropdown-item">團課管理</a>
+                                <a href="<%=request.getContextPath()%>/front-end/course/myAbsence.html" class="dropdown-item">查看團課缺席</a>
+                                <a href="<%=request.getContextPath()%>/front-end/room/room_order_info.jsp"
+                                   class="dropdown-item">場地管理</a>
+                                <input class="btn text-danger" style="margin-left:10px;" type="submit" value="登出">
+                                <input type="hidden" name="action" value="logout"/>
+                            </div>
+                        </form>
+                    </div>
+                    <a href="<%=request.getContextPath()%>/front-end/article/listAllArticle.jsp" class="nav-link">論壇</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-item nav-link dropdown-toggle"
+                           data-toggle="dropdown">聯絡我們</a>
+                        <div class="dropdown-menu text-capitalize">
+                            <a href="<%=request.getContextPath()%>/front-end/question/listAllQuestion.jsp" class="dropdown-item">常見問題</a>
+                            <a href="<%=request.getContextPath()%>/front-end/news/listAllNews.jsp" class="dropdown-item">最新資訊</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+      </div>
+      <!-- Navbar End -->
+
+
+
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0">
+        <div id="blog-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="./resources/img/carousel-1.jpg" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <h3 class="text-primary text-capitalize m-0">你最好的選擇</h3>
+                        <h2 class="display-2 m-0 mt-2 mt-md-4 text-white font-weight-bold text-capitalize">Muscle
+                            Beach</h2>
+                        <a href="testlogin.html"
+                            class="btn btn-lg btn-outline-light mt-3 mt-md-5 py-md-3 px-md-5">現在加入</a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="./resources/img/carousel-2.jpg" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <h3 class="text-primary text-capitalize m-0">即刻體驗</h3>
+                        <h2 class="display-2 m-0 mt-2 mt-md-4 text-white font-weight-bold text-capitalize">強健體魄
+                        </h2>
+                        <a href="testlogin.html"
+                            class="btn btn-lg btn-outline-light mt-3 mt-md-5 py-md-3 px-md-5">現在加入</a>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#blog-carousel" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#blog-carousel" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+
+    <!-- Gym Class Start -->
+    <div class="container gym-class mb-5">
+        <div class="row px-3">
+            <div class="col-md-6 p-0">
+                <div
+                    class="gym-class-box d-flex flex-column align-items-end justify-content-center bg-primary text-right text-white py-5 px-5">
+                    <i class="flaticon-six-pack"></i>
+                    <h3 class="display-4 mb-3 text-white font-weight-bold">為什麼要找教練?</h3>
+                    <p id="more3">
+                        因為擁有一位經驗豐富的教練，可以讓您在健身的路上事半功倍，
+                        花更少的時間得到更多的效果，而且不怕練錯方式導致看不到成效，
+                        我們的教練都是一對一的形式，不用擔心會有多個學員而導致教練分身乏術使會員無法有良好的健身體驗，
+                        成為健身會員還可以擁有免費的團體課程可以選擇，心動的話還不趕緊加入!
+
+
+                    </p>
+                    <a onclick="showmore()" class="btn btn-lg btn-outline-light mt-4 px-4" id ="morebutton">查看更多 </a>
+                </div>
+            </div>
+            <div class="col-md-6 p-0">
+                
+                <div id="textmore"
+                
+                    class="gym-class-box d-flex flex-column align-items-start justify-content-center bg-secondary text-left text-white py-5 px-5">
+                    <h3 class="display-4 mb-3 text-white font-weight-bold">為什麼要找場地?</h3>
+                    <i class="flaticon-bodybuilding"></i>
+                    <p id="more4" >
+                        因為大部分的健身房當您預約完教練之後還得找場地才能夠與教練訓練，
+                        但是這些健身房通常沒有提供場地預約的服務，
+                       常常預約完教練卻又要另尋場地嗎?我們這邊不只讓您可以找教練，
+                       同時也可以讓你找場地，一條龍的服務，讓您不用跑來跑去!
+                       
+                    </p>
+                    <a onclick="showmore2()" class="btn btn-lg btn-outline-light mt-4 px-4; " id ="morebutton2">查看更多</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Gym Class End -->
+
+
+    <div class="container-fluid fh5co-content-box">
+        <div class="container">
+          <div class="row trainers pl-0 pr-0">
+            <div class="col-12 bg-50">
+              <div class="quote-box2 wow bounceInDown" data-wow-delay=".25s">
+                <h2 style="color: red;"> <b>教練</b> </h2>
+              </div>
+            </div>
+            <div class="col-md-6 pr-5 pl-5">
+              <div class="card text-center wow bounceInLeft" data-wow-delay=".25s"> <img class="card-img-top rounded-circle img-fluid" src="./resources/img/trainers1.jpg" alt="Card image">
+                <div class="card-body mb-5">
+                  <h4 class="card-title">小亘</h4>
+                  <p class="card-text">
+                    超過一千名學員，經驗豐富，擁有RTS美國國際阻力專業學院、ViPR、TRX、AASFP拳擊
+                    軟式藥球訓練、運動按摩認證等證照，訓練上井然有序，學員們一致好評!
+
+                    </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 pl-5 pr-5">
+              <div class="card text-center wow bounceInRight" data-wow-delay=".25s"> <img class="card-img-top rounded-circle img-fluid" src="./resources/img/trainers2.jpg" alt="Card image">
+                <div class="card-body mb-5">
+                  <h4 class="card-title">小謙</h4>
+                  <p class="card-text">
+                    擁有最多學員的推薦，持有超過十種證照，總是細心教導每一個學員，
+                    可以說是最全方位的教練，從頭開始健身，找他就對了!
+
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+      </div>
+      </div>
+
+
+
+
+
+    <!-- GYM Feature Start -->
+    <div class="container feature pt-5">
+        <div class="d-flex flex-column text-center mb-5">
+            <h4 class="text-primary font-weight-bold">為什麼要選擇我們</h4>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-5">
+                <div class="row align-items-center">
+                    <div class="col-sm-5">
+                        <img class="img-fluid mb-3 mb-sm-0" src="./resources/img/feature-1.jpg" alt="Image">
+                        <i class="flaticon-barbell"></i>
+                    </div>
+                    <div class="col-sm-7">
+                        <h4 class="font-weight-bold">一條龍服務</h4>
+                        <p>從健身，找課程，到找教練，最後找到場地開始健身，一連串的服務都幫你處理好，幫您節省時間。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-5">
+                <div class="row align-items-center">
+                    <div class="col-sm-5">
+                        <img class="img-fluid mb-3 mb-sm-0" src="./resources/img/feature-2.jpg" alt="Image">
+                        <i class="flaticon-training"></i>
+                    </div>
+                    <div class="col-sm-7">
+                        <h4 class="font-weight-bold">免費的團體課程</h4>
+                        <p>成為健身會員後，可以享有免費的團體課程，不需要花錢，只需要您有時間，就可以免費享受這項服務</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-5">
+                <div class="row align-items-center">
+                    <div class="col-sm-5">
+                        <img class="img-fluid mb-3 mb-sm-0" src="./resources/img/feature-3.jpg" alt="Image">
+                        <i class="flaticon-trends"></i>
+                    </div>
+                    <div class="col-sm-7">
+                        <h4 class="font-weight-bold">一對一的教練</h4>
+                        <p>直接與教練一對一，讓你可以受到教練完整的照顧，使您健身事半功倍。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-5">
+                <div class="row align-items-center">
+                    <div class="col-sm-5">
+                        <img class="img-fluid mb-3 mb-sm-0" src="./resources/img/feature-4.jpg" alt="Image">
+                        <i class="flaticon-support"></i>
+                    </div>
+                    <div class="col-sm-7">
+                        <h4 class="font-weight-bold">社群網站</h4>
+                        <p>擔心這邊的場地環境太差嗎?或是擔心教練的能力不足嗎?
+                            我們有社群網站可以讓您觀看其他健身會員的體驗，讓您心安!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- GYM Feature End -->
+
+
+    
+   
+
+    <!-- Footer Start -->
+    <div class="footer container-fluid mt-5 py-5 px-sm-3 px-md-5 text-white">
+        <div style="display: inline; padding: 0px;">
+            <div class="col-lg-0 col-md-10 " style="margin: auto; " >
+                <h5 class="text-white mb-4" >聯絡我們</h5>
+                <div>
+                    <ul style="list-style: none;display: flex; justify-content:flex-start;">
+                        <li style="width: 480px;">
+                            <p><i class="fa fa-map-marker-alt mr-2"></i>桃園市中壢區復興路46號9樓</p>
+                        </li>
+                        <li style="width: 420px;">
+                            <p><i class="fa fa-phone-alt mr-2"></i>03-2470-8053</p>
+                        </li>
+                        <li style="width: 220px;">
+                            <p><i class="fa fa-envelope mr-2"></i>tibame.com@gmail.com</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container border-top border-dark pt-2">
+            <p class="m-0 text-center text-white">
+                &copy; <a class="text-white font-weight-bold" href="#">Muscale beach</a>
+                
+                <a class="text-white font-weight-bold" href="https://htmlcodex.com"></a>版權所有 翻印必究
+            </p>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-outline-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+    <script src="./room/js/main.js"></script>
+</body>
+
+<script>
+    function showmore(){
+        let more3 = document.getElementById("more3");
+        more3.setAttribute("id","");
+        let morebutton = document.getElementById("morebutton");
+        morebutton.style.display="none";
+    }
+    function showmore2(){
+        let more4 = document.getElementById("more4");
+        more4.setAttribute("id","");
+        let morebutton = document.getElementById("morebutton2");
+        morebutton.style.display="none";
+    }
+
+        function show_hide() {
+            var login = document.getElementById("container1");
+            var signup = document.getElementById("container2");
+            var copyright = document.getElementById("copyright");
+
+            if (login.style.display === "none") {
+                login.style.display = "block";  //login出現
+                document.getElementById("username").value = "";
+                document.getElementById("password").value = "";
+                signup.style.display = "none";  //signup消失
+                copyright.style.margin = "200px 0px 0px 0px";
+            } else {
+                login.style.display = "none";   //login消失
+                signup.style.display = "block"; //signup出現
+                signup.style.visibility = "visible";
+                copyright.style.margin = "200px 0px 0px 0px";
+
+                document.getElementById("fullname").value = "";
+                document.getElementById("username2").value = "";
+                document.getElementById("password2").value = "";
+                document.getElementById("comfirm_password").value = "";
+            }
+        }
+    
+
+
+</script>
+
+<script src="js/main.js"></script>
+
+
+</html>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.musclebeach.course.mapper.ClassOrderMapper">
+    <resultMap id="classOrderResultMap" type="classOrder">
+        <id column="order_id" property="orderID"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <association property="employee" column="emp_id"
+                     select="com.musclebeach.backstage.mapper.EmployeeMapper.selectEmpNameByID"/>
+        <association property="member" column="mem_id"
+                     select="com.musclebeach.backstage.mapper.MemberMapper.selectMemNameByID"/>
+        <association property="teamClass" column="class_id"
+                     select="com.musclebeach.course.mapper.TeamClassMapper.selectByID"/>
+    </resultMap>
+    <insert id="insert">
+        insert ignore into class_order (mem_id, class_id)
+        values (#{member.memID}, #{teamClass.classID});
+    </insert>
+    <select id="selectAll" resultMap="classOrderResultMap">
+        select *
+        from class_order
+    </select>
+    <select id="selectByID" resultMap="classOrderResultMap">
+        select *
+        from class_order
+        where order_id = #{orderID}
+    </select>
+    <select id="selectByMemID" resultMap="classOrderResultMap">
+        select *
+        from class_order
+        where mem_id = #{memID}
+    </select>
+    <select id="countByClassID" resultType="java.lang.Integer">
+        select count(class_id)
+        from class_order
+        where class_id = #{classID}
+          and order_status = 1
+    </select>
+    <select id="getPeopleMaxByClassID" resultType="integer">
+        select people_max
+        from team_class
+        where class_id = #{classID}
+    </select>
+    <select id="isReserved" resultType="java.lang.Integer">
+        select count(order_id)
+        from class_order
+        where class_id = #{classID}
+          and mem_id = #{memID}
+          and order_status = 1
+    </select>
+    <select id="selectByCondition" resultMap="classOrderResultMap">
+        select *
+        from class_order
+        <where>
+            <if test="orderID != null">
+                and order_id = #{orderID}
+            </if>
+            <if test="employee != null">
+                and emp_id = #{employee.empID}
+            </if>
+            <if test="member != null">
+                and mem_id = #{member.memID}
+            </if>
+            <if test="teamClass != null">
+                and class_id = #{teamClass.classID}
+            </if>
+            <if test="orderStatus != null">
+                and order_status = #{orderStatus}
+            </if>
+        </where>
+    </select>
+    <update id="update">
+        update class_order
+        <set>
+            <if test="employee != null">
+                emp_id = #{employee.empID},
+            </if>
+            <if test="member != null">
+                mem_id = #{member.memID},
+            </if>
+            <if test="teamClass != null">
+                class_id = #{teamClass.classID},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus},
+            </if>
+        </set>
+        where order_id = #{orderID};
+    </update>
+</mapper>

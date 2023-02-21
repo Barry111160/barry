@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.musclebeach.course.mapper.TeamClassMapper">
+    <resultMap id="teamClassResultMap" type="TeamClass">
+        <id column="class_id" property="classID"/>
+        <result column="class_name" property="className"/>
+        <result column="people_max" property="peopleMax"/>
+        <result column="class_content" property="classContent"/>
+        <result column="class_status" property="classStatus"/>
+        <association column="type_id" property="classType"
+                     select="com.musclebeach.course.mapper.ClassTypeMapper.selectByID"/>
+        <association column="emp_id" property="employee"
+                     select="com.musclebeach.backstage.mapper.EmployeeMapper.selectEmpNameByID"/>
+    </resultMap>
+    <sql id="selectIf">
+        <if test="employee != null">
+            and emp_id = #{employee.empID}
+        </if>
+        <if test="classType != null">
+            <if test="classType.typeID != null">
+                and type_id = #{classType.typeID}
+            </if>
+        </if>
+        <if test="className != null and className != ''">
+            and class_name like CONCAT('%', trim(#{className}), '%')
+        </if>
+        <if test="peopleMax != null">
+            and people_max = #{peopleMax}
+        </if>
+        <if test="classContent != null and classContent != ''">
+            and class_content like CONCAT('%', trim(#{classContent}), '%')
+        </if>
+        <if test="classStatus != null">
+            and class_Status = #{classStatus}
+        </if>
+    </sql>
+    <sql id="selectLimitIf">
+        <if test="teamClass.employee != null">
+            and emp_id = #{teamClass.employee.empID}
+        </if>
+        <if test="teamClass.classType != null">
+            <if test="teamClass.classType.typeID != null">
+                and type_id = #{teamClass.classType.typeID}
+            </if>
+        </if>
+        <if test="teamClass.className != null and teamClass.className != ''">
+            and class_name like CONCAT('%', trim(#{teamClass.className}), '%')
+        </if>
+        <if test="teamClass.peopleMax != null">
+            and people_max = #{teamClass.peopleMax}
+        </if>
+        <if test="teamClass.classContent != null and teamClass.classContent != ''">
+            and class_content like CONCAT('%', trim(#{teamClass.classContent}), '%')
+        </if>
+        <if test="teamClass.classStatus != null">
+            and class_Status = #{teamClass.classStatus}
+        </if>
+    </sql>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="classID">
+        insert into team_class (emp_id, type_id, class_name, people_max, class_content, class_status)
+        values (#{employee.empID}, #{classType.typeID}, #{className}, #{peopleMax}, #{classContent}, #{classStatus});
+    </insert>
+    <select id="selectAll" resultMap="teamClassResultMap">
+        select *
+        from team_class
+    </select>
+    <select id="selectByID" resultMap="teamClassResultMap">
+        select *
+        from team_class
+        where class_id = #{classID}
+    </select>
+    <select id="selectClassNameByID" resultType="com.musclebeach.course.entity.TeamClass">
+        select class_id, class_name
+        from team_class
+        where class_id = #{classID}
+    </select>
+    <select id="selectByCondition" resultMap="teamClassResultMap">
+        select * from team_class
+        <where>
+            <include refid="selectIf"/>
+        </where>
+    </select>
+    <select id="selectByLimit" resultMap="teamClassResultMap">
+        select *
+        from team_class
+        <where>
+            <include refid="selectLimitIf"/>
+        </where>
+        limit #{begin}, #{size}
+    </select>
+    <select id="totalCount" resultType="integer">
+        select count(*)
+        from team_class
+        <where>
+            <include refid="selectIf"/>
+        </where>
+    </select>
+    <update id="update">
+        update team_class
+        <set>
+            <if test="employee != null">
+                emp_id = #{employee.empID},
+            </if>
+            <if test="classType != null">
+                type_id = #{classType.typeID},
+            </if>
+            <if test="className != null and className != ''">
+                class_name = #{className},
+            </if>
+            <if test="peopleMax != null">
+                people_max = #{peopleMax},
+            </if>
+            <if test="classContent != null and classContent != ''">
+                class_content = #{classContent},
+            </if>
+            <if test="classStatus != null">
+                class_Status = #{classStatus}
+            </if>
+        </set>
+        where class_id = ${classID}
+    </update>
+    <delete id="deleteByID">
+        delete
+        from team_class
+        where class_id = #{classID}
+    </delete>
+</mapper>

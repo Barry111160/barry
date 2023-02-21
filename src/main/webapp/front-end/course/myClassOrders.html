@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>myClassOrders</title>
+    <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="app">
+    <div>{{memInfo !== null ? `你好，${memInfo.memName}。以下是你的預約課程` : '無法獲取你的會員資訊'}}</div>
+    <!-- 表格 -->
+    <el-table :data="tableData" stripe style="width: 100%">
+        <el-table-column align="center" label="課程種類" prop="teamClass.classType.typeName"></el-table-column>
+        <el-table-column align="center" label="課程名稱" prop="teamClass.className"></el-table-column>
+        <el-table-column align="center" label="訂單狀態" prop="orderStatus">
+            <template slot-scope="scope"> {{scope.row.orderStatus === 1 ? "已成功" : "已取消"}}</template>
+        </el-table-column>
+        <el-table-column align="center" label="預約成立時間" prop="createTime"></el-table-column>
+        <el-table-column align="center" label="預約修改時間" prop="updateTime"></el-table-column>
+        <el-table-column align="center" label="操作">
+            <el-row slot-scope="scope">
+                <el-button @click="getDetails(scope.$index)" round type="primary">查看詳情</el-button>
+                <el-button @click="cancel(scope.$index)" round type="danger" v-show="scope.row.orderStatus === 1">
+                    取消課程
+                </el-button>
+                <el-button @click="reserve(scope.$index)" round type="success" v-show="scope.row.orderStatus === 0">
+                    重新預約
+                </el-button>
+            </el-row>
+        </el-table-column>
+    </el-table>
+    <!-- 詳情 -->
+    <el-dialog :visible.sync="centerDialogVisible" center title="詳情" width="75%">
+        <div>課程內容: {{classDetails.classContent}}</div>
+        <div>已報名人數: {{classDetails.reserved}}</div>
+        <el-table :data="details">
+            <el-table-column align="center" label="日期">
+                <template slot-scope="scope"> {{new Date(scope.row.startTime).toLocaleDateString('sv-SE')}}</template>
+            </el-table-column>
+            <el-table-column align="center" label="上課時間">
+                <template slot-scope="scope">
+                    {{new Date(scope.row.startTime).toLocaleTimeString('sv-SE', {hour12: false})}}
+                </template>
+            </el-table-column>
+            <el-table-column align="center" label="下課時間">
+                <template slot-scope="scope">
+                    {{new Date(scope.row.endTime).toLocaleTimeString('sv-SE', {hour12: false})}}
+                </template>
+            </el-table-column>
+        </el-table>
+    </el-dialog>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/element-ui/lib/umd/locale/zh-TW.js"></script>
+<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+
+<script>
+    ELEMENT.locale(ELEMENT.lang.zhTW);
+    const app = new Vue({
+        el: '#app',
+        mounted() {
+            this.getMemInfo();
+            this.load();
+        },
+        data() {
+            return {
+                // 會員資訊
+                memID: -1,
+                memInfo: null,
+                // 表格
+                tableData: null,
+                // 查看詳情資料
+                details: null, // 上課時間
+                classDetails: {classContent: null, reserved: null}, // 課程詳情
+                centerDialogVisible: false, // 詳情開關
+            };
+        },
+        methods: {
+            // 獲取會員名稱、權限等資料
+            async getMemInfo() {
+                axios.get(`../../member/memID`)
+                    .then((Response) => {
+                        this.memInfo = Response.data.data;
+                        this.memID = this.memInfo.memID;
+                    });
+            },
+            // 載入
+            load() {
+                axios
+                    .get(`../../classOrders/memID`)
+                    .then((Response) => {
+                        this.tableData = Response.data.data;
+                        for (row of this.tableData) {
+                            row.createTime = new Date(row.createTime).toLocaleString('zh', {hour12: false});
+                        }
+                        for (row of this.tableData) {
+                            row.updateTime = new Date(row.updateTime).toLocaleString('zh', {hour12: false});
+                        }
+                    })
+                    .catch((error) => this.$message.error('系統忙碌中'));
+            },
+            // 預約
+            reserve(index) {
+                if (this.memID == -1) {
+                    return this.$confirm('點擊確定前往登入', '你尚未登入', {
+                        confirmButtonText: '確定',
+                        cancelButtonText: '取消',
+                        type: 'info',
+                    })
+                        .then(() => {
+                            location.href = 'https://youtu.be/nDchQNPuA0k';
+                        })
+                        .catch(() => {
+                            this.$message({
+                                type: 'info',
+                                message: '需要登入才能預約課程...',
+                            });
+                        });
+                }
+                if (this.memInfo.memStatus !== 1) {
+                    return this.$message.error('你的會員狀態為未啟用或以被除籍');
+                }
+                if (this.memInfo.memAccess === 0) {
+                    return this.$confirm('升級為健身會員即可預約課程', '你是一般會員', {
+                        confirmButtonText: '確定',
+                        cancelButtonText: '取消',
+                        type: 'info',
+                    })
+                        .then(() => {
+                            location.href = 'https://youtu.be/nDchQNPuA0k';
+                        })
+                        .catch(() => {
+                            this.$message({
+                                type: 'info',
+                                message: '需要成為健身會員才能預約課程...',
+                            });
+                        });
+                }
+                if (this.memInfo.memAccess === 2) {
+                    return this.$message.error('你已被停權!');
+                }
+                return this.$confirm('確定預約嗎?', '提示', {
+                    confirmButtonText: '確定',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                })
+                    .then(() => {
+                        const classID = this.tableData[index].teamClass.classID;
+                        axios
+                            .post('../../classOrders/reservation', {
+                                member: {
+                                    memID: this.memID,
+                                },
+                                teamClass: {
+                                    classID: classID,
+                                },
+                            })
+                            .then((Response) => {
+                                if (Response.data.code === 20011) {
+                                    this.load();
+                                    return this.$message({
+                                        message: Response.data.msg,
+                                        type: 'success',
+                                    });
+                                } else {
+                                    this.$message.error(Response.data.msg);
+                                }
+                            })
+                            .catch((error) => this.$message.error('系統忙碌中'));
+                    })
+                    .catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消',
+                        });
+                    });
+            },
+            // 取消預約
+            cancel(index) {
+                this.$confirm('確定取消預約嗎?', '提示', {
+                    confirmButtonText: '確定',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                })
+                    .then(() => {
+                        const classID = this.tableData[index].teamClass.classID;
+                        axios
+                            .put('../../classOrders/cancel', {
+                                member: {
+                                    memID: this.memID,
+                                },
+                                teamClass: {
+                                    classID: classID,
+                                },
+                            })
+                            .then((Response) => {
+                                if (Response.data.code === 20031) {
+                                    this.load();
+                                    return this.$message({
+                                        message: Response.data.msg,
+                                        type: 'success',
+                                    });
+                                } else {
+                                    this.$message.error(Response.data.msg);
+                                }
+                            })
+                            .catch((error) => this.$message.error('系統忙碌中'));
+                    })
+                    .catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '尚未取消預約',
+                        });
+                    });
+            },
+            // 查看詳情
+            getDetails(index) {
+                this.centerDialogVisible = true;
+                const classID = this.tableData[index].teamClass.classID;
+                this.classDetails.classContent = this.tableData[index].teamClass.classContent;
+                axios
+                    .get(`../../classSchedules/classID/${classID}`)
+                    .then((Response) => (this.details = Response.data.data))
+                    .catch((error) => this.$message.error('系統忙碌中'));
+                axios
+                    .get(`../../classOrders/classID/${classID}`)
+                    .then((Response) => (this.classDetails.reserved = Response.data.data))
+                    .catch((error) => this.$message.error('系統忙碌中'));
+            },
+        },
+    });
+</script>
+</body>
+</html>

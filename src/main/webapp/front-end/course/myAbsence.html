@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>myAbsenece</title>
+    <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="app">
+    <div>{{memInfo !== null ? `你好，${memInfo.memName}。以下是你的缺席表` : '無法獲取你的會員資訊'}}</div>
+    <el-table :data="tableData" style="width: 100%"
+              :default-sort="{prop: 'classSchedule.startTime', order: 'descending'}">
+        <el-table-column prop="classSchedule.startTime" label="日期" sortable
+        >
+            <template slot-scope="scope">
+                {{new Date(scope.row.classSchedule.startTime).toLocaleDateString('sv-SE')}}
+            </template>
+        </el-table-column
+        >
+        <el-table-column prop="classSchedule.teamClass.className" label="課程名稱"></el-table-column>
+    </el-table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/element-ui/lib/umd/locale/zh-TW.js"></script>
+<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+
+<script>
+    ELEMENT.locale(ELEMENT.lang.zhTW);
+    const app = new Vue({
+        el: '#app',
+        mounted() {
+            this.getMemInfo();
+            this.getAbsence();
+        },
+        data() {
+            return {
+                // 會員資訊
+                memID: -1,
+                memInfo: null,
+                // 表格
+                tableData: null,
+            };
+        },
+        methods: {
+            // 獲取會員名稱、權限等資料
+            async getMemInfo() {
+                axios.get(`../../member/memID`)
+                    .then((Response) => {
+                        this.memInfo = Response.data.data;
+                        this.memID = this.memInfo.memID;
+                    });
+            },
+            // 獲取缺席表
+            getAbsence() {
+                axios.get(`../../absentMembers/memID`).then((Response) => {
+                    this.tableData = Response.data.data;
+                });
+            },
+        },
+    });
+</script>
+</body>
+</html>

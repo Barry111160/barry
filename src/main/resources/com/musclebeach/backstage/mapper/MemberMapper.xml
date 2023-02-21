@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.musclebeach.backstage.mapper.MemberMapper">
+
+    <update id="updateMemberAccess">
+        update member
+        <set>
+            mem_access = 1,
+            <if test="membership != null">
+                membership = DATE_ADD(membership,INTERVAL 365 day)
+            </if>
+            <if test="membership == null">
+                membership = curdate() + interval 365 day
+            </if>
+        </set>
+        where mem_id = #{memID}
+    </update>
+</mapper>
